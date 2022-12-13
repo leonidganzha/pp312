@@ -8,7 +8,7 @@
 
 <br/>
 <th:if test="${!empty users}">
-    <table>
+    <table border="1">
         <tr>
             <th>Actions</th>
             <th>id</th>
@@ -19,7 +19,7 @@
         <tr th:each="user: ${users}">
             <td>
                 <a th:href="@{/edit/{id}(id=${user.getId()})}">Edit</a>
-                <a th:href="@{/remove/{id}(id=${user.getId()})}">Delete</a>
+                <form th:action="@{remove/{id}(id=${user.getId()})}" th:method="delete"><button>Delete</button></form>
             </td>
             <td th:text="${user.getId()}">id</td>
             <td th:text="${user.getFirstName()}">firstName</td>
@@ -28,7 +28,16 @@
         </tr>
     </table>
 </th:if>
-
+<!--
+<h1>Remove user</h1>
+<form action="#" th:action="@{/remove}" th:object="${user}" method="delete">
+    <input type="number" th:field="*{id}" id="id"/>
+    <label for="id">ID</label>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
+-->
+<h1>Add user</h1>
 <form th:method="POST" th:action="@{/add}" th:object="${user}">
     <input type="text" th:field="*{firstName}" id="first_name"/>
     <label for="first_name">First name</label>
